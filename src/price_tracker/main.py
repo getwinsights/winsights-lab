@@ -1,19 +1,20 @@
 from collector import collect_product_price, save_to_csv
 from notifier import send_email
 from analysis import get_last_price
-
+from pathlib import Path
 
 def main():
     print("Starting price tracker...")
-    data = collect_product_price()
-    save_to_csv(data, "price_history.csv", fieldnames=["timestamp", "product", "price", "raw_price"])
+    input_data = collect_product_price()
+    DATA_FILE = Path("data") / "price_history.csv"
+    save_to_csv(input_data, DATA_FILE, fieldnames=["timestamp", "product", "price", "raw_price"])
     
     last_price = get_last_price()
 
-    current_price = data["price"]
+    current_price = input_data["price"]
 
     if last_price is None:
-        message = f"First run. Price is {current_price}"
+        message = f"Price is {current_price}"
     else:
         diff = current_price - last_price
 
