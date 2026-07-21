@@ -6,8 +6,8 @@ from pathlib import Path
 def main():
     print("Starting price tracker...")
     input_data = collect_product_price()
-    DATA_FILE = Path("data") / "price_history.csv"
-    save_to_csv(input_data, DATA_FILE, fieldnames=["timestamp", "product", "price", "raw_price"])
+    filepath = Path("data") / "price_history.csv"
+    save_to_csv(input_data, filepath, fieldnames=["timestamp", "product", "price", "raw_price"])
     
     last_price = get_last_price()
 

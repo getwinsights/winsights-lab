@@ -28,12 +28,10 @@ def collect_product_price():
         "raw_price": price_text
     }
 
-def save_to_csv(data, filename, fieldnames):
-    base_dir = os.path.dirname(__file__)
-    path = os.path.join(base_dir, filename)
-    file_exists = os.path.exists(path)
+def save_to_csv(data, filepath, fieldnames):
+    file_exists = os.path.exists(filepath)
 
-    with open(path, mode="a", newline="") as file:
+    with open(filepath, mode="a", newline="") as file:
         writer = csv.DictWriter(file, fieldnames=fieldnames)
 
         if not file_exists:
